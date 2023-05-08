@@ -12,7 +12,7 @@ class MovieHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return SizedBox(
-      height: _screenSize.height * 0.2,
+      height: _screenSize.height * 0.22,
       child: PageView(
         pageSnapping: false,
         controller: PageController(
@@ -27,7 +27,7 @@ class MovieHorizontal extends StatelessWidget {
   List<Widget> _tarjetas(BuildContext context) {
     return peliculas.map((pelicula) {
       return Container(
-        margin: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.only(right: 10.0),
         child: Column(
           children: [
             ClipRRect(              
@@ -35,14 +35,14 @@ class MovieHorizontal extends StatelessWidget {
               child: FadeInImage(
                 placeholder: const AssetImage('assets/img/no-image.jpg'), 
                 image: NetworkImage(pelicula.getPosterImg()),
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 5.0,),
             Text(
               pelicula.title!,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),
