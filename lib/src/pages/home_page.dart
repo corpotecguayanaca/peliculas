@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    peliculasProvider.getPopulares();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Peliculas en cines"),
@@ -63,11 +64,14 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 5.0,
           ),
-          FutureBuilder(
-            future: peliculasProvider.getPopulares(),
+          StreamBuilder(
+            stream: peliculasProvider.popularesStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return MovieHorizontal(peliculas: snapshot.data!);
+                return MovieHorizontal(
+                  peliculas: snapshot.data!,
+                  siguentePagina: peliculasProvider.getPopulares,
+                );
               } else {
                 return const SizedBox(
                     height: 15.0,
