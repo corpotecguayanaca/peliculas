@@ -70,4 +70,11 @@ class Pelicula {
     }
     return 'https://image.tmdb.org/t/p/w500//$posterPath';
   }
+
+  getBackdropImg() {
+    if(posterPath == null){
+      return 'https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg';
+    }
+    return 'https://image.tmdb.org/t/p/w500//$backdropPath';
+  }
 }
