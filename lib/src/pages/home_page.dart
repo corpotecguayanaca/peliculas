@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas/providers/movies_provider.dart';
+import 'package:peliculas/src/providers/movies_provider.dart';
 import 'package:peliculas/src/widgets/card_swiper_widget.dart';
 import 'package:peliculas/src/widgets/movie_horizontal.dart';
 
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 5.0,
+            height: 10.0,
           ),
           StreamBuilder(
             stream: peliculasProvider.popularesStream,
