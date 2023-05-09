@@ -14,24 +14,25 @@ class PeliculaDetalle extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Pelicula;
 
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        _crearAppbar(pelicula),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            const SizedBox(
-              height: 10.0,
-            ),
-            _posterTitulo(context, pelicula),
-            const SizedBox(height: 20.0,),
-            _listaGeneros(context, pelicula),
-            _descripcion(context, pelicula),
-            const SizedBox(height: 20.0,),
-            _crearCasting(context, pelicula),
-          ]),
-        ),
-      ],
-    ));
+      body: CustomScrollView(
+        slivers: [
+          _crearAppbar(pelicula),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              const SizedBox(
+                height: 10.0,
+              ),
+              _posterTitulo(context, pelicula),
+              const SizedBox(height: 20.0,),
+              _listaGeneros(context, pelicula),
+              _descripcion(context, pelicula),
+              const SizedBox(height: 20.0,),
+              _crearCasting(context, pelicula),
+            ]),
+          ),
+        ],
+      )
+    );
   }
 
   Widget _crearAppbar(Pelicula pelicula) {
