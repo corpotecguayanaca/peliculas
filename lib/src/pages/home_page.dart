@@ -30,26 +30,30 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _swiperTarjetas() {
-    return FutureBuilder(
-      future: peliculasProvider.getEnCines(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return CardSwiper(
-            peliculas: snapshot.data!,
-          );
-        } else {
-          return const SizedBox(
-              height: 400.0,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ));
-        }
-      },
+    return Column(
+      children: [
+        FutureBuilder(
+          future: peliculasProvider.getEnCines(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return CardSwiper(
+                peliculas: snapshot.data!,
+              );
+            } else {
+              return const SizedBox(
+                  height: 400.0,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ));
+            }
+          },
+        ),
+      ],
     );
   }
 
   Widget _footer(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
