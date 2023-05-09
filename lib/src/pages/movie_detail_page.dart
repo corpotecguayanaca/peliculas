@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/actor_model.dart';
+import 'package:peliculas/src/models/genero_model.dart';
 import 'package:peliculas/src/models/movie_model.dart';
 import 'package:peliculas/src/providers/movies_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
-  const PeliculaDetalle({super.key});
+  PeliculaDetalle({super.key});
+  final peliProvider = PeliculasProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class PeliculaDetalle extends StatelessWidget {
               height: 10.0,
             ),
             _posterTitulo(context, pelicula),
+            const SizedBox(height: 20.0,),
+            _listaGeneros(context, pelicula),
             _descripcion(context, pelicula),
+            const SizedBox(height: 20.0,),
             _crearCasting(context, pelicula),
           ]),
         ),
@@ -112,6 +117,35 @@ class PeliculaDetalle extends StatelessWidget {
     );
   }
 
+  Widget _listaGeneros(BuildContext context, Pelicula pelicula) {
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Géneros",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          FutureBuilder(
+            future: peliProvider.getGeneros(pelicula.id.toString()),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return _crearTextoGeneros(snapshot.data!);
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _descripcion(BuildContext context, Pelicula pelicula) {
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -122,7 +156,9 @@ class PeliculaDetalle extends StatelessWidget {
             "Sinopsis",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
-          const SizedBox(height: 10.0,),
+          const SizedBox(
+            height: 10.0,
+          ),
           Container(
             margin: const EdgeInsets.only(left: 10.0),
             child: Text(
@@ -136,8 +172,6 @@ class PeliculaDetalle extends StatelessWidget {
   }
 
   Widget _crearCasting(BuildContext context, Pelicula pelicula) {
-    final peliProvider = PeliculasProvider();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -148,7 +182,9 @@ class PeliculaDetalle extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
-        const SizedBox(height: 10.0,),
+        const SizedBox(
+          height: 10.0,
+        ),
         FutureBuilder(
           future: peliProvider.getCast(pelicula.id.toString()),
           builder: (context, snapshot) {
@@ -204,6 +240,24 @@ class PeliculaDetalle extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _crearTextoGeneros(List<Genero> generos) {
+    String genresString = '';
+    for (var item in generos) {
+      genresString += "${item.name!}, ";
+    }
+    if (genresString.length >= 2) {
+      genresString = genresString.substring(0, genresString.length - 2);
+    }
+    genresString += '.';
+    return Container(
+      margin: const EdgeInsets.only(left: 10.0),
+      child: Text(
+        genresString,
+        textAlign: TextAlign.justify,
       ),
     );
   }

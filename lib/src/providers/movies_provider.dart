@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:peliculas/src/models/actor_model.dart';
+import 'package:peliculas/src/models/genero_model.dart';
 import 'package:peliculas/src/models/movie_model.dart';
 
 class PeliculasProvider {
@@ -76,5 +77,19 @@ class PeliculasProvider {
     final cast = Cast.fromJsonList(decodedData['cast']);
 
     return cast.actores;
+  }
+
+  Future<List<Genero>> getGeneros (String peliId) async {
+    final url = Uri.https(_url, '3/movie/$peliId', {
+      'api_key' : _apiKey,
+      'language': _language,
+    });
+
+    final respuesta = await http.get(url);
+    final decodedData = json.decode(respuesta.body);
+
+    final genres = Generos.fromJsonList(decodedData['genres']);
+
+    return genres.generos;
   }
 }
