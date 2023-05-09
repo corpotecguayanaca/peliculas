@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              "Peliculas populares",
+              "Populares",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
