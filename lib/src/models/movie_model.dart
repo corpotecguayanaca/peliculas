@@ -29,6 +29,7 @@ class Pelicula {
   bool? video;
   double? voteAverage;
   int? voteCount;
+  String? uniqueId;
 
   Pelicula({
     this.adult,
