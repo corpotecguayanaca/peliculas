@@ -9,7 +9,7 @@ class CardSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     return Container(
       padding: const EdgeInsets.only(top: 20.0),
@@ -19,8 +19,8 @@ class CardSwiper extends StatelessWidget {
           return _tarjeta(context, peliculas[index]);
         },
         layout: SwiperLayout.STACK,
-        itemWidth: _screenSize.width * 0.7,
-        itemHeight: _screenSize.height * 0.5,
+        itemWidth: screenSize.width * 0.7,
+        itemHeight: screenSize.height * 0.5,
       ),
     );
   }

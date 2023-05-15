@@ -11,7 +11,7 @@ class PeliculasProvider {
   final _url = 'api.themoviedb.org';
   final _language = 'es-VE';
   int _popularesPage = 0;
-  List<Pelicula> _populares = [];
+  final List<Pelicula> _populares = [];
   bool _cargando = false;
 
   final _popularesStreamController = StreamController<List<Pelicula>>.broadcast();
