@@ -21,21 +21,19 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(
-                context: context, 
+                context: context,
                 delegate: DataSearch(),
               );
-            }, 
+            },
           ),
         ],
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _swiperTarjetas(),
-            _footer(context),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _swiperTarjetas(),
+          _footer(context),
+        ],
       ),
     );
   }
